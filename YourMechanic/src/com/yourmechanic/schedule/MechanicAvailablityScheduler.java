@@ -30,8 +30,8 @@ public class MechanicAvailablityScheduler {
 		StringBuffer outputFile = new StringBuffer();
 		outputFile.append(System.getProperty("user.dir")).append("/").append(args[1].trim());
 		
-		System.out.println("Will read the input file from "+Paths.get(inputFile.toString()));
 		List<String> list = new ArrayList<>();
+		System.out.println("Reading input file from "+Paths.get(inputFile.toString()));
 		final BufferedReader br = Files.newBufferedReader(Paths.get(inputFile.toString()));
 		final BufferedWriter bw = Files.newBufferedWriter(Paths.get(outputFile.toString()));
 		try{
@@ -59,6 +59,7 @@ public class MechanicAvailablityScheduler {
 					}
 				}
 			});
+			System.out.println("Writing output file to "+Paths.get(outputFile.toString()));
 			bw.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
