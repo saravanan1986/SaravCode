@@ -102,15 +102,19 @@ public class MechanicAvailablityScheduler {
 		for(Appointment existingappointment : appointmenList){
 			appointmentCounter+=1;
 			if(appointment.getStartTime() < existingappointment.getStartTime() && appointment.getEndTime() < existingappointment.getEndTime()){
-				workingList.addAll(appointmentCounter-1, appointmenList.subList(appointmentCounter-1, appointmenList.size()));
+				if(appointment.getEndTime() > existingappointment.getStartTime()){
+					workingList.add(new Appointment(appointment.getEndTime(),existingappointment.getEndTime()));
+					workingList.addAll(appointmenList.subList(appointmentCounter, appointmenList.size()));
+				}else{
+					workingList.addAll(appointmenList.subList(appointmentCounter-1, appointmenList.size()));
+				}
 				break;
 			}else if(appointment.getStartTime() > existingappointment.getStartTime() && appointment.getEndTime() < existingappointment.getEndTime()){
 				workingList.add(new Appointment(existingappointment.getStartTime(), appointment.getStartTime()));
 				workingList.add(new Appointment(appointment.getEndTime(), existingappointment.getEndTime()));
 				if(appointmentCounter < appointmenList.size()){
-					workingList.addAll(appointmentCounter+1, appointmenList.subList(appointmentCounter, appointmenList.size()));
+					workingList.addAll(appointmenList.subList(appointmentCounter, appointmenList.size()));
 				}
-				appointmentCounter+=1;
 				break;
 			} else if(appointment.getEndTime() > existingappointment.getEndTime()){
 				if(appointment.getStartTime() == existingappointment.getStartTime()){
