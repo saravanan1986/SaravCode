@@ -39,7 +39,8 @@ public class MechanicAvailablityScheduler {
 			list.forEach(data->{
 				String[] dataSplit = data.split(",");
 				if(dataSplit.length != 3){
-					System.out.println("Input input format");
+					System.out.println("Incorrect input format");
+					return;
 				}
 				if(dataSplit[0].trim().equalsIgnoreCase("add")){
 					Add(new Appointment(new Integer(dataSplit[1].trim()), new Integer(dataSplit[2].trim())));
